@@ -35,83 +35,83 @@ VectorDataLayer allows you to easily load a data array and convert it into a vec
 ```js
 var arr = [
 	{name: "data 1", x: 100, y: 100},
-    {name: "data 2", x: 200, y: 200},
-    {name: "data 3", x: 300, y: 300},
-    {name: "data 4", x: 400, y: 400}
+	{name: "data 2", x: 200, y: 200},
+	{name: "data 3", x: 300, y: 300},
+	{name: "data 4", x: 400, y: 400}
 ];
 ```
 A vector layer backed by the above array can be created by running the following code:
 ```js
 var oldlVL = new oldl.VectorDataLayer(map, "My Vector DataLayer", { // map is the ol.Map instance
 	name: function (data) {
-    	return data.name;
-    },
+    		return data.name;
+	},
 	id: function (data) {
-    	return data.name;
-    },
+		return data.name;
+	},
 	feature: function (data) {
-    	return new ol.Feature({geometry: new ol.geom.Point([data.x, data.y])});
-    },
+		return new ol.Feature({geometry: new ol.geom.Point([data.x, data.y])});
+	},
 	props: function (data) {
-    	return {
-        	"Name": data.name,
-            "Location": data.x + "," + data.y
-        };
-    },
+		return {
+			"Name": data.name,
+			"Location": data.x + "," + data.y
+		};
+	},
 	onLoad: function (params, done) {
-    	done(arr); // this loads the data array
-    },
+		done(arr); // this loads the data array
+	}
 });
 oldlVL.load(); // you can pass your own params object, for decisions in onLoad()
 ```
 
-For more details on this data layer, please refer to the [API Documentation](https://github.com/shyam-dasgupta/ol-datalayers/api.md).
+For more details on this data layer, please refer to the [API Documentation](https://github.com/shyam-dasgupta/ol-datalayers/blob/master/API.md).
 
 #### oldl.ImageDataLayer
 ImageDataLayer allows you to easily load a data array and convert it to show images on the map. Consider the following array:
 ```js
 var arr = [
 	{name: "image 1", src: "http://url.to.image1.png", x: 100, y: 100, mpp: 0.1, width: 10, height: 15},
-    {name: "image 2", src: "http://url.to.image2.png", x: 200, y: 200, mpp: 0.1, width: 20, height: 25},
-    {name: "image 3", src: "http://url.to.image3.png", x: 300, y: 300, mpp: 0.1, width: 30, height: 35},
-    {name: "image 4", src: "http://url.to.image4.png", x: 400, y: 400, mpp: 0.1, width: 40, height: 45}
+	{name: "image 2", src: "http://url.to.image2.png", x: 200, y: 200, mpp: 0.1, width: 20, height: 25},
+	{name: "image 3", src: "http://url.to.image3.png", x: 300, y: 300, mpp: 0.1, width: 30, height: 35},
+	{name: "image 4", src: "http://url.to.image4.png", x: 400, y: 400, mpp: 0.1, width: 40, height: 45}
 ];
 ```
 An image layer backed by the above array can be created by running the following code:
 ```js
 var oldlIL = new oldl.ImageDataLayer(map, "My Vector DataLayer", { // map is the ol.Map instance
 	name: function (data) {
-    	return data.name;
-    },
+		return data.name;
+	},
 	id: function (data) {
-    	return data.name;
-    },
+		return data.name;
+	},
 	feature: function (data) {
-    	return { // as per oldl.ImageDataLayer.Feature
-        	src: data.image,
-            width: data.width,
-            height: data.height,
-            mPerPx: data.mPerPx,
-            x: data.x,
-            y: data.y,
-            rotation: data.rotation
-    	};
-    },
+		return { // as per oldl.ImageDataLayer.Feature
+			src: data.image,
+			width: data.width,
+			height: data.height,
+			mPerPx: data.mPerPx,
+			x: data.x,
+			y: data.y,
+			rotation: data.rotation
+		};
+	},
 	props: function (data) {
-    	return {
-        	"Name": data.name,
-            "Size": data.width + "x" + data.height,
-            "Location": data.x + "," + data.y,
-        };
-    },
+		return {
+			"Name": data.name,
+			"Size": data.width + "x" + data.height,
+			"Location": data.x + "," + data.y
+		};
+	},
 	onLoad: function (params, done) {
-    	done(arr); // this loads the data array
-    },
+		done(arr); // this loads the data array
+	}
 });
 oldlIL.load(); // you can pass your own params object, for decisions in onLoad()
 ```
 
-For more details on this data layer, please refer to the [API Documentation](https://github.com/shyam-dasgupta/ol-datalayers/api.md).
+For more details on this data layer, please refer to the [API Documentation](https://github.com/shyam-dasgupta/ol-datalayers/blob/master/API.md).
 
 ### Running the unminified version of ol-DataLayers
 
@@ -122,7 +122,7 @@ Load the debug library instead into your HTML:
 ```
 
 ## API Documentation
-The complete API documentation is available [here](https://github.com/shyam-dasgupta/ol-datalayers/api.md).
+The complete API documentation is available [here](https://github.com/shyam-dasgupta/ol-datalayers/blob/master/API.md).
 
 ## Bugs
 Please use the [GitHub issue tracker](https://github.com/shyam-dasgupta/ol-datalayers/issues) for all bugs and feature requests. Before creating a new issue, do a quick search to see if the problem has been reported already.
