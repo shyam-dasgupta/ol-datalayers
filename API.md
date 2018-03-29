@@ -38,9 +38,9 @@
             * *[.IOptions](#oldl.BaseDataLayer.IOptions)*
                 * [.IFormEntry](#oldl.BaseDataLayer.IOptions.IFormEntry)
             * *[.extract(layerOrFeature)](#oldl.BaseDataLayer.extract) ⇒ <code>undefined</code> \| [<code>BaseDataLayer</code>](#oldl.BaseDataLayer)*
-    * [.VectorDataLayer](#oldl.VectorDataLayer) ⇐ <code>oldl.BaseDataLayer.&lt;TData,</code>
+    * [.VectorDataLayer](#oldl.VectorDataLayer) ⇐ <code>oldl.BaseDataLayer.&lt;TData, ol.layer.Vector, ol.Feature&gt;</code>
         * [new oldl.VectorDataLayer(map, name, options)](#new_oldl.VectorDataLayer_new)
-    * [.ImageDataLayer](#oldl.ImageDataLayer) ⇐ <code>oldl.BaseDataLayer.&lt;TData,</code>
+    * [.ImageDataLayer](#oldl.ImageDataLayer) ⇐ <code>oldl.BaseDataLayer.&lt;TData, ol.layer.Group, oldl.ImageDataLayer.Feature&gt;</code>
         * [new oldl.ImageDataLayer(map, name, options)](#new_oldl.ImageDataLayer_new)
         * _instance_
             * [.setImageFile(file, data)](#oldl.ImageDataLayer+setImageFile) ⇒ <code>boolean</code>
@@ -430,14 +430,14 @@ Utility method to obtain the data layer, if any, linked to the given native laye
 
 <a name="oldl.VectorDataLayer"></a>
 
-### oldl.VectorDataLayer ⇐ <code>oldl.BaseDataLayer.&lt;TData,</code>
+### oldl.VectorDataLayer ⇐ <code>oldl.BaseDataLayer.&lt;TData, ol.layer.Vector, ol.Feature&gt;</code>
 Data Layer class for creating a data backed [<code>ol.layer.Vector</code>](ol.layer.Vector) layer, allowing direct management
 of features with data. This also provides added capabilities like a framework to obtain information for a feature
 (for showing in popups, etc.), creation of forms for adding or editing features, and more. It also provides a
 mechanism to easily edit features directly on the map using various OpenLayers interactions.
 
 **Kind**: static class of [<code>oldl</code>](#oldl)  
-**Extends**: <code>oldl.BaseDataLayer.&lt;TData,</code>  
+**Extends**: <code>oldl.BaseDataLayer.&lt;TData, ol.layer.Vector, ol.Feature&gt;</code>  
 **Template**: TData  
 <a name="new_oldl.VectorDataLayer_new"></a>
 
@@ -453,7 +453,7 @@ Constructor for creating a vector data layer instance.
 
 <a name="oldl.ImageDataLayer"></a>
 
-### oldl.ImageDataLayer ⇐ <code>oldl.BaseDataLayer.&lt;TData,</code>
+### oldl.ImageDataLayer ⇐ <code>oldl.BaseDataLayer.&lt;TData, ol.layer.Group, oldl.ImageDataLayer.Feature&gt;</code>
 Data Layer class for creating a data backed group of [<code>ol.layer.Image</code>](ol.layer.Image) layers, allowing direct management
 of the images with data. The images can be sourced from local files or image URIs. This also provides added
 capabilities like a framework to obtain information for an image (for showing in popups, etc.), creation of
@@ -466,10 +466,10 @@ forms for adding or editing images, and more.
     implementing a reusable pool of images, if necessary.
 
 **Kind**: static class of [<code>oldl</code>](#oldl)  
-**Extends**: <code>oldl.BaseDataLayer.&lt;TData,</code>  
+**Extends**: <code>oldl.BaseDataLayer.&lt;TData, ol.layer.Group, oldl.ImageDataLayer.Feature&gt;</code>  
 **Template**: TData  
 
-* [.ImageDataLayer](#oldl.ImageDataLayer) ⇐ <code>oldl.BaseDataLayer.&lt;TData,</code>
+* [.ImageDataLayer](#oldl.ImageDataLayer) ⇐ <code>oldl.BaseDataLayer.&lt;TData, ol.layer.Group, oldl.ImageDataLayer.Feature&gt;</code>
     * [new oldl.ImageDataLayer(map, name, options)](#new_oldl.ImageDataLayer_new)
     * _instance_
         * [.setImageFile(file, data)](#oldl.ImageDataLayer+setImageFile) ⇒ <code>boolean</code>
@@ -483,11 +483,12 @@ forms for adding or editing images, and more.
 Constructor for creating an image data layer instance.
 
 
-| Param | Type | Description |
-| --- | --- | --- |
-| map | <code>ol.Map</code> | The map instance is used to add the underlying layer and fit to the layer's extent using <code>[fit](#oldl.BaseDataLayer+fit)()</code>. |
-| name | <code>string</code> | A name for this layer, that can be obtained from this instance using <code>[getName](#oldl.BaseDataLayer+getName)()</code>. |
-| options | <code>oldl.BaseDataLayer.IOptions.&lt;TData, ol.Feature&gt;</code> | Other options. |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| map | <code>ol.Map</code> |  | The map instance is used to add the underlying layer and fit to the layer's extent using [fit](#oldl.BaseDataLayer+fit)(). |
+| name | <code>string</code> |  | A name for this layer, that can be obtained from this instance using [getName](#oldl.BaseDataLayer+getName)(). |
+| options | <code>oldl.BaseDataLayer.IOptions.&lt;TData, ol.Feature&gt;</code> |  | Other options. |
+| [options.preventCache] | <code>boolean</code> | <code>true</code> | If not <code>false</code>, adds a new url param to the image URL to prevent cache. |
 
 <a name="oldl.ImageDataLayer+setImageFile"></a>
 
