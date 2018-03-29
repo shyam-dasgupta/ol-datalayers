@@ -780,12 +780,15 @@ oldl.VectorDataLayer = function (map, name, options) {
  * @param {string} name A name for this layer, that can be obtained from this instance using
  * {@link oldl.BaseDataLayer#getName}().
  * @param {oldl.BaseDataLayer.IOptions.<TData, ol.Feature>} options Other options.
+ * @param {boolean} [options.preventCache=true] If not <code>false</code>, adds a new url param to the image URL to prevent cache.
  * @constructor
  * @template TData
  * @extends {oldl.BaseDataLayer.<TData, ol.layer.Group, oldl.ImageDataLayer.Feature>}
  */
 oldl.ImageDataLayer = function (map, name, options) {
     var _this = this;
+    options = options || {};
+    options.preventCache = options.preventCache != false;
 
     /**
      * @type {Object.<string, oldl.ImageDataLayer.Feature>}
@@ -896,6 +899,15 @@ oldl.ImageDataLayer = function (map, name, options) {
         return true;
     };
 
+    function _updateUrlToPreventCache(url) {
+        url = url.replace(/&?_=[^$&]*/g, "");
+        var indexOfQsn = url.indexOf("?");
+        if (indexOfQsn < 0) url += "?";
+        else if (indexOfQsn != url.length - 1) url += "&";
+        url += "_=" + Date.now();
+        return url;
+    }
+
     /**
      * @param {string} id
      * @param {oldl.ImageDataLayer.Feature} feature
@@ -930,7 +942,7 @@ oldl.ImageDataLayer = function (map, name, options) {
         }
         else {
             olLayerImage.setSource(new ol.source.ImageStatic({
-                url: feature.src,
+                url: options.preventCache ? _updateUrlToPreventCache(feature.src) : feature.src,
                 imageExtent: imageExtent
             }));
         }
