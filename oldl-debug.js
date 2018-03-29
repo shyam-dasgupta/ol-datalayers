@@ -883,11 +883,13 @@ oldl.ImageDataLayer = function (map, name, options) {
                 feature.src = file; //this.src;
                 feature.width = this.width;
                 feature.height = this.height;
+                var imageExtent = _calculateExtent(feature);
                 olLayerImage.setSource(new ol.source.ImageStatic({
                     url: this.src,
-                    imageExtent: _calculateExtent(feature)
+                    imageExtent: imageExtent
                 }));
                 _this.processFeatureChanges(feature);
+                olLayerImage.setExtent(imageExtent);
             };
         };
         fr.readAsDataURL(file);
