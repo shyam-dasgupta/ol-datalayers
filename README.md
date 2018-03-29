@@ -11,7 +11,7 @@ As of date, ol-DataLayers has been tested with OpenLayers 4.6.4, but should work
 ## Usage
 
 ### Dependency
-As is evident, applications using ol-DataLayers also to load OpenLayers resources:
+As is evident, applications using ol-DataLayers also need to load OpenLayers resources:
 ```html
 <link rel="stylesheet" href="https://openlayers.org/en/v4.6.4/css/ol.css" type="text/css">
 <script src="https://openlayers.org/en/v4.6.4/build/ol.js" type="text/javascript"></script>
